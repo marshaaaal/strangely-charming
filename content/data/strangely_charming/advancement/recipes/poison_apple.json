@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:nether/brew_potion",
+  "criteria": {
+    "local_brewery": {
+      "trigger": "minecraft:tick",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:type_specific/player": {
+                "advancements": {
+                  "minecraft:nether/brew_potion": true
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "local_brewery"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "strangely_charming:poison_apple"
+    ]
+  }
+}

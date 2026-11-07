@@ -1,0 +1,29 @@
+{
+  "parent": "strangely_charming:discovery/root",
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_chestplate"
+    },
+    "title": {
+      "text": "Back to Basics"
+    },
+    "description": {
+      "text": "Use a grindstone to recover material from fully repaired, unenchanted armor."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_chestplate"
+          }
+        ]
+      }
+    }
+  }
+}

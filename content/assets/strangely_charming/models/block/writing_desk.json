@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "strangely_charming:block/writing_desk_top",
+    "front": "strangely_charming:block/writing_desk_front",
+    "side": "strangely_charming:block/writing_desk_side",
+    "bottom": "strangely_charming:block/writing_desk_bottom"
+  }
+}

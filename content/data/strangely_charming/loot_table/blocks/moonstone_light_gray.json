@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "strangely_charming:moonstone_light_gray"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:match_tool",
+        "predicate": {
+          "items": "#minecraft:pickaxes"
+        }
+      }
+    }
+  ]
+}

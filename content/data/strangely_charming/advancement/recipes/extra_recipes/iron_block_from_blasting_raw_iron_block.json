@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "material": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:raw_iron_block"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "strangely_charming:extra_recipes/iron_block_from_blasting_raw_iron_block"
+    ]
+  }
+}

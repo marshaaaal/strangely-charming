@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "material": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:sugar_cane"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "strangely_charming:extra_recipes/paper"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+id = "strangely_charming"
+name = "Strangely Charming"
+version = "0.2.9"
+description = "Configurable crafting, exploration, and village features for Horizon"
+authors = ["Evander"]
+api = "0.2"
+side = "both"
+capabilities = ["registries"]

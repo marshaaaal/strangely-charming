@@ -1,0 +1,11 @@
+{
+  "template": "minecraft:apple",
+  "max_stack_size": 64,
+  "components": {
+    "!minecraft:food": {},
+    "!minecraft:consumable": {},
+    "minecraft:item_name": {
+      "translate": "item.strangely_charming.poison_apple"
+    }
+  }
+}

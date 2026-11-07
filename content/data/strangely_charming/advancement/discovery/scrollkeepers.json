@@ -1,0 +1,29 @@
+{
+  "parent": "strangely_charming:discovery/root",
+  "display": {
+    "icon": {
+      "id": "strangely_charming:writing_desk"
+    },
+    "title": {
+      "text": "Local Business"
+    },
+    "description": {
+      "text": "Place a Writing Desk to employ a Scrollkeeper. Press J by default to check your quests."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "strangely_charming:writing_desk"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/tooting_goat_horn",
+  "textures": {
+    "layer0": "strangely_charming:item/raid_horn"
+  }
+}

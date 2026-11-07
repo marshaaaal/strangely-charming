@@ -1,0 +1,8 @@
+{
+  "amount": 2,
+  "trades": [
+    "strangely_charming:lumberjack/2",
+    "strangely_charming:lumberjack/3"
+  ],
+  "random_sequence": "strangely_charming:trade_set/lumberjack/level_2"
+}

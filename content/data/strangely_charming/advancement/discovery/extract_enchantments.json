@@ -1,0 +1,29 @@
+{
+  "parent": "strangely_charming:discovery/root",
+  "display": {
+    "icon": {
+      "id": "minecraft:grindstone"
+    },
+    "title": {
+      "text": "Off the Page"
+    },
+    "description": {
+      "text": "Place a book and enchanted gear in a grindstone."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:grindstone"
+          }
+        ]
+      }
+    }
+  }
+}

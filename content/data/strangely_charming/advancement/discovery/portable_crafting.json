@@ -1,0 +1,29 @@
+{
+  "parent": "strangely_charming:discovery/root",
+  "display": {
+    "icon": {
+      "id": "minecraft:crafting_table"
+    },
+    "title": {
+      "text": "A Workshop to Go"
+    },
+    "description": {
+      "text": "Carry a crafting table and press the Portable Crafting key (default V)."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:crafting_table"
+          }
+        ]
+      }
+    }
+  }
+}

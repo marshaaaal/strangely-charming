@@ -1,0 +1,8 @@
+[package]
+name = "strangely_charming"
+version = "0.2.9"
+edition = "2024"
+description = "Configurable crafting, exploration, and village features for Horizon"
+
+[lib]
+path = "src/lib.rs"

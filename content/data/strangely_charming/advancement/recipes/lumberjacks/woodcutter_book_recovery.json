@@ -1,0 +1,33 @@
+{
+  "parent": "strangely_charming:recipes/lumberjacks/woodcutter",
+  "criteria": {
+    "previous_unlock": {
+      "trigger": "minecraft:tick",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:type_specific/player": {
+                "advancements": {
+                  "strangely_charming:recipes/lumberjacks/woodcutter": true
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "strangely_charming:lumberjacks/woodcutter"
+    ]
+  }
+}

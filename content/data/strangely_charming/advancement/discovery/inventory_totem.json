@@ -1,0 +1,29 @@
+{
+  "parent": "strangely_charming:discovery/root",
+  "display": {
+    "icon": {
+      "id": "minecraft:totem_of_undying"
+    },
+    "title": {
+      "text": "A Second Chance"
+    },
+    "description": {
+      "text": "Keep a totem in your pack."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:totem_of_undying"
+          }
+        ]
+      }
+    }
+  }
+}

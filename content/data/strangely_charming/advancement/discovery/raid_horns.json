@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "strangely_charming:raid_horn"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "strangely_charming:raid_horn"
+    },
+    "title": {
+      "text": "Sound the Retreat"
+    },
+    "description": {
+      "text": "Recover a Retreat Horn from a raid captain."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "strangely_charming:discovery/root"
+}

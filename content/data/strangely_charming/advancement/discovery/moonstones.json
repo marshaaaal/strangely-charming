@@ -1,0 +1,46 @@
+{
+  "parent": "strangely_charming:discovery/root",
+  "display": {
+    "icon": {
+      "id": "strangely_charming:moonstone_white"
+    },
+    "title": {
+      "text": "Moonlight in the End"
+    },
+    "description": {
+      "text": "Find glowing Moonstone in a geode on the outer End islands."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "strangely_charming:moonstone_black",
+              "strangely_charming:moonstone_blue",
+              "strangely_charming:moonstone_brown",
+              "strangely_charming:moonstone_cyan",
+              "strangely_charming:moonstone_gray",
+              "strangely_charming:moonstone_green",
+              "strangely_charming:moonstone_light_blue",
+              "strangely_charming:moonstone_light_gray",
+              "strangely_charming:moonstone_lime",
+              "strangely_charming:moonstone_magenta",
+              "strangely_charming:moonstone_orange",
+              "strangely_charming:moonstone_pink",
+              "strangely_charming:moonstone_purple",
+              "strangely_charming:moonstone_red",
+              "strangely_charming:moonstone_white",
+              "strangely_charming:moonstone_yellow"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

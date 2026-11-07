@@ -1,0 +1,29 @@
+{
+  "parent": "strangely_charming:discovery/root",
+  "display": {
+    "icon": {
+      "id": "strangely_charming:woodcutter"
+    },
+    "title": {
+      "text": "Timber Trade"
+    },
+    "description": {
+      "text": "Give a villager a Table Saw as a job site."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "strangely_charming:woodcutter"
+          }
+        ]
+      }
+    }
+  }
+}

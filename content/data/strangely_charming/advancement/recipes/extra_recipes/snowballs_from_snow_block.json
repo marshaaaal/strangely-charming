@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "material": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:snow_block"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "strangely_charming:extra_recipes/snowballs_from_snow_block"
+    ]
+  }
+}

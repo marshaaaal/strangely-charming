@@ -1,0 +1,10 @@
+{
+  "template": "minecraft:gray_stained_glass",
+  "item": true,
+  "properties": {
+    "light": 11,
+    "requires_tool": true,
+    "hardness": 0.3,
+    "occludes": false
+  }
+}

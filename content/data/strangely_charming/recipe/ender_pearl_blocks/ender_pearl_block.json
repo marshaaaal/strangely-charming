@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "EEE",
+    "EEE"
+  ],
+  "key": {
+    "E": "minecraft:ender_pearl"
+  },
+  "result": {
+    "id": "strangely_charming:ender_pearl_block"
+  }
+}

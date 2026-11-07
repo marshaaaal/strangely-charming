@@ -1,0 +1,5 @@
+{
+  "template": "minecraft:crafting_table",
+  "item": true,
+  "properties": {}
+}

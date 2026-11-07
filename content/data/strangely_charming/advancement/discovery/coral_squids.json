@@ -1,0 +1,27 @@
+{
+  "parent": "strangely_charming:discovery/root",
+  "display": {
+    "icon": {
+      "id": "minecraft:brain_coral"
+    },
+    "title": {
+      "text": "Among the Coral"
+    },
+    "description": {
+      "text": "Meet a coral squid in its natural habitat."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "meet": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "entity": {
+          "type": "strangely_charming:coral_squid"
+        }
+      }
+    }
+  }
+}

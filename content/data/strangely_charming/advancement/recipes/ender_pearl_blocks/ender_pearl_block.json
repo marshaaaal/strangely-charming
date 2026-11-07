@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "material": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:ender_pearl"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "strangely_charming:ender_pearl_blocks/ender_pearl_block"
+    ]
+  }
+}

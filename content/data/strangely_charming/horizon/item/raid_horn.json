@@ -1,0 +1,10 @@
+{
+  "template": "minecraft:goat_horn",
+  "components": {
+    "minecraft:item_name": {
+      "translate": "item.strangely_charming.raid_horn"
+    },
+    "minecraft:instrument": "minecraft:dream_goat_horn"
+  },
+  "max_stack_size": 1
+}

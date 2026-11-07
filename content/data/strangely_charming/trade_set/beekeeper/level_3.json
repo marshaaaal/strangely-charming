@@ -1,0 +1,8 @@
+{
+  "amount": 2,
+  "trades": [
+    "strangely_charming:beekeeper/4",
+    "strangely_charming:beekeeper/5"
+  ],
+  "random_sequence": "strangely_charming:trade_set/beekeeper/level_3"
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "APA",
+    "AAA"
+  ],
+  "key": {
+    "A": "minecraft:apple",
+    "P": {
+      "type": "strangely_charming:weakness_potion"
+    }
+  },
+  "result": {
+    "id": "strangely_charming:poison_apple",
+    "count": 8
+  }
+}

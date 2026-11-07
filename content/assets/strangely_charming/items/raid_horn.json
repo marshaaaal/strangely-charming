@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:using_item",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "strangely_charming:item/raid_horn"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "strangely_charming:item/tooting_raid_horn"
+    }
+  }
+}

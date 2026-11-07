@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#X#",
+    " # "
+  ],
+  "key": {
+    "#": [
+      "minecraft:brick",
+      "minecraft:bricks"
+    ],
+    "X": "minecraft:furnace"
+  },
+  "result": {
+    "id": "strangely_charming:kiln"
+  }
+}

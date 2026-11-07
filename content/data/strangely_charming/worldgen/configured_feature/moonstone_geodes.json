@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:simple_random_selector",
+  "features": [
+    {
+      "feature": "strangely_charming:moonstone_white_geode",
+      "placement": []
+    },
+    {
+      "feature": "strangely_charming:moonstone_magenta_geode",
+      "placement": []
+    },
+    {
+      "feature": "strangely_charming:moonstone_yellow_geode",
+      "placement": []
+    },
+    {
+      "feature": "strangely_charming:moonstone_pink_geode",
+      "placement": []
+    },
+    {
+      "feature": "strangely_charming:moonstone_light_gray_geode",
+      "placement": []
+    },
+    {
+      "feature": "strangely_charming:moonstone_purple_geode",
+      "placement": []
+    },
+    {
+      "feature": "strangely_charming:moonstone_brown_geode",
+      "placement": []
+    },
+    {
+      "feature": "strangely_charming:moonstone_red_geode",
+      "placement": []
+    }
+  ]
+}
