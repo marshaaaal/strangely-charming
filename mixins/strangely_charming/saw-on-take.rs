@@ -1,4 +1,4 @@
-fn hook(menu: &mut Menu, env: &Env, s: usize, taken: &ItemStack) -> core::ops::ControlFlow<()> {
+fn hook(menu: &mut Menu, env: &Env, s: usize, taken: &mut ItemStack) -> core::ops::ControlFlow<()> {
     if !menu.evanders_is_table_saw() {
         return core::ops::ControlFlow::Continue(());
     }

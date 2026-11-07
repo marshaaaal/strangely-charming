@@ -472,13 +472,16 @@ impl Game<'_> {
             m.extra.variant3 = rank;
             trade.unset = true;
         }
-        self.native_level_play_sound(
-            "minecraft:entity.player.levelup",
-            [p.x, p.y, p.z],
-            8,
-            0.5,
-            1.1,
-        );
+        if let Some(level) = self.native_level(self.dim.id()) {
+            self.native_level_play_sound(
+                level,
+                "minecraft:entity.player.levelup",
+                [p.x, p.y, p.z],
+                8,
+                0.5,
+                1.1,
+            );
+        }
         self.sc_notice(format!(
             "Quest #{serial} handed in. Earned {} emeralds and {} XP.",
             kind.reward(),

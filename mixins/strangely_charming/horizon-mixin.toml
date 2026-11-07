@@ -1,10 +1,10 @@
 [mod]
 id = "strangely_charming"
-version = "0.2.10"
+version = "0.2.11"
 priority = 100
 
 [compatibility]
-horizon_revision = "66f3981f522b24c250b21523a70080965b940424"
+horizon_revision = "2ebf00a0281c592f79191e76fce0e7d522c6f425"
 
 [[module]]
 id = "format"
@@ -315,6 +315,12 @@ bindings=[
  {name="game",ty="&mut crate::game::Game<'_>",value="&mut *self"},
  {name="batch",ty="&mut HudBatch",value="batch"},
 ]
+
+[[module]]
+id="inventory-totem-slot"
+file="crates/horizon-client/src/game/totem.rs"
+name="strangely_charming_totem"
+source="inventory-totem.rs"
 
 [[injection]]
 id="totem-consume"
@@ -651,6 +657,16 @@ bindings=[
 ]
 
 [[injection]]
+id="animal-models-document"
+kind="OVERWRITE"
+target="horizon_client_lib::mobs::MobTypes::load_with_document"
+helper="animal-models-document.rs"
+bindings=[
+ {name="root",ty="&Path",value="root"},
+ {name="document",ty="&EntityModelDocument",value="document"},
+]
+
+[[injection]]
 id="animal-models-server"
 kind="OVERWRITE"
 target="horizon_client_lib::mobs::MobTypes::load_for_server"
@@ -954,7 +970,7 @@ bindings=[
  {name="menu",ty="&mut Menu",value="&mut *self"},
  {name="env",ty="&Env",value="env"},
  {name="s",ty="usize",value="s"},
- {name="taken",ty="&ItemStack",value="taken"},
+ {name="taken",ty="&mut ItemStack",value="&mut *taken"},
 ]
 
 [[injection]]

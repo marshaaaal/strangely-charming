@@ -1,5 +1,6 @@
 // Classic 64 × 32 box UVs used by Charm's animal skins.
-use super::{MobTypes, Part, Polygon};
+use super::{EntityModelDocument, MobTypes, Part, Polygon};
+use std::path::Path;
 use std::sync::Arc;
 
 fn part(name: &str, at: [f32; 3]) -> Part {
@@ -78,7 +79,12 @@ fn squid() -> Part {
     root
 }
 
-pub(super) fn install(types: &mut MobTypes, render: bool) {
+pub(super) fn load(
+    root: &Path,
+    render: bool,
+    document: Option<&EntityModelDocument>,
+) -> crate::Result<MobTypes> {
+    let mut types = MobTypes::load_with_models(root, render, document)?;
     if let Some(kind) = types.types.get_mut("strangely_charming:coral_squid") {
         kind.width = 0.45;
         kind.height = 0.6;
@@ -89,4 +95,5 @@ pub(super) fn install(types: &mut MobTypes, render: bool) {
             kind.layers.insert("squid#main".into(), model);
         }
     }
+    Ok(types)
 }
