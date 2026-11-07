@@ -1,5 +1,5 @@
 use super::Game;
-use horizon_client::{entities::Experience, items::ItemStack, text::Text};
+use horizon_client::{entities::Experience, items::ItemStack};
 use horizon_world::nbt::{Compound, Tag};
 
 pub(super) const TOTEM: &str = "strangely_charming:totem_of_enchanting";
@@ -20,6 +20,26 @@ pub(super) fn set_custom(stack: &mut ItemStack, key: &str, value: Tag) {
             .data_mut()
             .set_other("minecraft:custom_data", Some(tag));
     }
+}
+fn update_balance(stack: &mut ItemStack, old: i32, new: i32) {
+    set_custom(stack, POINTS, Tag::Int(new));
+    let mut lore = match stack.data().and_then(|d| d.other("minecraft:lore")) {
+        Some(Tag::List(lines)) => lines.clone(),
+        _ => Vec::new(),
+    };
+    let previous = Tag::String(format!("Stored XP: {old}").as_str().into());
+    if old > 0
+        && let Some(i) = lore.iter().position(|line| line == &previous)
+    {
+        lore.remove(i);
+    }
+    if new > 0 {
+        lore.push(Tag::String(format!("Stored XP: {new}").as_str().into()));
+    }
+    stack.data_mut().set_other(
+        "minecraft:lore",
+        (!lore.is_empty()).then_some(Tag::List(lore)),
+    );
 }
 fn base(level: i64) -> i64 {
     match level {
@@ -54,13 +74,17 @@ fn from_points(points: i32) -> Experience {
     }
 }
 impl Game<'_> {
-    pub(super) fn sc_notice(&mut self, text: impl Into<String>) {
-        let text = Text::literal(text.into());
-        let who = self.native_acting_id();
-        if !self.native_tell(who, text.clone()) {
-            self.system_message(text);
-        }
+    pub(super) fn sc_rune_at(&self, pos: [i32; 3]) -> bool {
+        self.block_name(pos)
+            .starts_with("strangely_charming:runestone_")
     }
+    pub(super) fn sc_has_hammer(&self) -> bool {
+        horizon_mods::evanders_config::enabled("runebreaker")
+            && self
+                .held()
+                .is_some_and(|s| s.item.as_ref() == "strangely_charming:runebreaker")
+    }
+
     pub(super) fn sc_use_item(&mut self, stack: &ItemStack) -> bool {
         if stack.count == 0 {
             return false;
@@ -102,21 +126,18 @@ impl Game<'_> {
             let Some(held) = self.held_mut().as_mut() else {
                 return true;
             };
-            set_custom(held, POINTS, Tag::Int(sum));
-            held.data_mut().set_other(
-                "minecraft:lore",
-                Some(Tag::List(vec![Tag::String(
-                    format!("Stored XP: {sum}").as_str().into(),
-                )])),
-            );
+            update_balance(held, stored, sum);
             self.experience = Experience::default();
             self.sc_notice(format!("Deposited {balance} XP. Totem holds {sum} XP."));
         } else if stored == 0 {
             self.sc_notice("Sneak and use this totem to store your XP.");
         } else {
-            *self.held_mut() = None;
+            let Some(held) = self.held_mut().as_mut() else {
+                return true;
+            };
+            update_balance(held, stored, 0);
             self.experience = from_points(sum);
-            self.sc_notice(format!("The totem broke and returned {stored} XP."));
+            self.sc_notice(format!("The totem returned {stored} XP."));
         }
         true
     }

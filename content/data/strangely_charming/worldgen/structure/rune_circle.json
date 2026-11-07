@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#strangely_charming:has_rune_circle",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "start_pool": "strangely_charming:circle/start",
+  "size": 1,
+  "start_height": {
+    "absolute": -1
+  },
+  "max_distance_from_center": 50,
+  "liquid_settings": "ignore_waterlogging",
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "horizon:start_checks": {
+    "liquid": "top",
+    "terrain_radius": 1,
+    "terrain_range": 4,
+    "strangely_charming:site": "circle"
+  }
+}

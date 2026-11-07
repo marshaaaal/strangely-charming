@@ -1,6 +1,6 @@
 [mod]
 id = "strangely_charming"
-version = "0.2.9"
+version = "0.2.10"
 priority = 100
 
 [compatibility]
@@ -1134,7 +1134,7 @@ id="quest-badges-packet"
 kind="HEAD"
 target="horizon_client::game::native_hooks::Game<'_>::native_client_packet"
 helper="quest-badges-packet.rs"
-bindings=[{name="packet",ty="&ClientboundPlayPacket",value="packet"}]
+bindings=[{name="game",ty="&mut crate::game::Game<'_>",value="&mut *self"},{name="packet",ty="&ClientboundPlayPacket",value="packet"}]
 
 [[injection]]
 id="quest-disconnect"
@@ -1149,3 +1149,83 @@ cancellable=true
 target="horizon_client_lib::mobs::Mob::command_name"
 helper="job-name.rs"
 bindings=[{name="mob",ty="&Mob",value="self"}]
+
+[[module]]
+id="sc-alerts"
+file="crates/horizon-client/src/game.rs"
+name="sc_alerts"
+source="alerts.rs"
+
+[[injection]]
+id="alert-draw"
+kind="HEAD"
+target="horizon_client::game::native_hooks::Game<'_>::native_gui_render_post"
+helper="alert-draw.rs"
+bindings=[{name="game",ty="&crate::game::Game<'_>",value="self"},{name="batch",ty="&mut HudBatch",value="batch"},{name="hidden",ty="bool",value="gui_hidden"}]
+
+[[injection]]
+id="quest-ready"
+kind="HEAD"
+target="horizon_client::game::native_hooks::Game<'_>::native_player_tick"
+helper="quest-ready.rs"
+bindings=[{name="game",ty="&mut crate::game::Game<'_>",value="&mut *self"}]
+
+[[injection]]
+id="rune-mining"
+kind="HEAD"
+cancellable=true
+target="horizon_client::game::hand::Game<'_>::destroy_progress"
+helper="rune-mining.rs"
+bindings=[
+ {name="game",ty="&mut crate::game::Game<'_>",value="&mut *self"},
+ {name="pos",ty="[i32;3]",value="pos"},
+]
+
+[[injection]]
+id="rune-click"
+kind="HEAD"
+target="horizon_client::game::native_hooks::Game<'_>::native_left_click_block"
+helper="rune-click.rs"
+bindings=[
+ {name="game",ty="&mut crate::game::Game<'_>",value="&mut *self"},
+ {name="pos",ty="[i32;3]",value="pos"},
+ {name="canceled",ty="&mut bool",value="canceled"},
+]
+
+[[injection]]
+id="rune-break"
+kind="HEAD"
+target="horizon_client::game::native_hooks::Game<'_>::native_destroy_block"
+helper="rune-break.rs"
+bindings=[
+ {name="game",ty="&mut crate::game::Game<'_>",value="&mut *self"},
+ {name="pos",ty="[i32;3]",value="pos"},
+ {name="canceled",ty="&mut bool",value="canceled"},
+]
+
+[[injection]]
+id="rune-creative-client"
+kind="HEAD"
+cancellable=true
+target="horizon_client::game::remote::Game<'_>::remote_mining"
+helper="rune-creative-client.rs"
+bindings=[
+ {name="game",ty="&mut crate::game::Game<'_>",value="&mut *self"},
+ {name="start",ty="bool",value="start"},
+]
+
+[[injection]]
+id="structure-site"
+kind="HEAD"
+cancellable=true
+target="horizon_world::worldgen::structure::start_checks::StartChecks::pass"
+helper="structure-site.rs"
+bindings=[{name="checks",ty="&StartChecks",value="self"},{name="queries",ty="&mut impl CheckQueries",value="queries"},{name="chunk",ty="ChunkPos",value="chunk"},{name="y",ty="i32",value="y"},{name="biomes",ty="&BTreeSet<BiomeId>",value="biomes"}]
+
+[[injection]]
+id="rune-finish"
+kind="HEAD"
+cancellable=true
+target="horizon_client::game::lan_actions::Game<'_>::guest_stop_digging"
+helper="rune-finish.rs"
+bindings=[{name="game",ty="&mut crate::game::Game<'_>",value="&mut *self"},{name="host",ty="&mut LanHost",value="host"},{name="conn",ty="u32",value="conn"},{name="pos",ty="[i32;3]",value="pos"}]

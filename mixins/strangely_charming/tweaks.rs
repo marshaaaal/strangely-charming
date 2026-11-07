@@ -1,5 +1,5 @@
 use super::Game;
-use horizon_client::{items::ItemStack, mobs::Species, text::Text};
+use horizon_client::{items::ItemStack, mobs::Species};
 use horizon_world::nbt::{Compound, Tag};
 const APPLE: &str = "strangely_charming:poison_apple";
 use horizon_client::mobs::strangely_charming_poison as poison;
@@ -113,7 +113,7 @@ pub(super) fn key(game: &mut Game<'_>, key: &str, pressed: bool) {
         renderer.fullbright = on;
     }
     game.settings.save(&Game::options_path());
-    game.native_chat(if on {
+    game.sc_notice(if on {
         "Fullbright: on"
     } else {
         "Fullbright: off"
@@ -144,9 +144,7 @@ pub(super) fn interact(
         return;
     }
     if !poison::eligible(m) {
-        game.native_feedback(Text::literal(
-            "Poison apples cannot be used on child villagers or nitwits.",
-        ));
+        game.sc_notice("Poison apples cannot be used on child villagers or nitwits.");
         return;
     }
     game.ensure_offers(i);

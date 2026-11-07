@@ -1,5 +1,7 @@
 use std::{collections::BTreeMap, fs, io, path::Path, sync::OnceLock};
 const FEATURES: &[&str] = &[
+    "rune_circles",
+    "underground_ruins",
     "runebreaker",
     "moonstones",
     "enchanting_totems",

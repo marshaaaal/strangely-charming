@@ -11,7 +11,7 @@ fn hook(mods: &mut Vec<NativeMod>) {
     .collect();
     mods.push(NativeMod {
         id: "strangely_charming".into(),
-        title: "Strangely Charming 0.2.9".into(),
+        title: "Strangely Charming 0.2.10".into(),
         description: "Gameplay tweaks".into(),
         keys,
     });

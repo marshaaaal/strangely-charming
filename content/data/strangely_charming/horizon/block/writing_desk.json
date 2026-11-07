@@ -1,5 +1,5 @@
 {
-  "template": "minecraft:crafting_table",
+  "template": "minecraft:oak_planks",
   "item": true,
   "properties": {}
 }

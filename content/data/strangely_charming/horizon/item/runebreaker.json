@@ -4,6 +4,44 @@
   "components": {
     "minecraft:item_name": {
       "translate": "item.strangely_charming.runebreaker"
+    },
+    "minecraft:tool": {
+      "default_mining_speed": 1.0,
+      "damage_per_block": 0,
+      "rules": [
+        {
+          "blocks": [
+            "strangely_charming:runestone_0",
+            "strangely_charming:runestone_1",
+            "strangely_charming:runestone_2",
+            "strangely_charming:runestone_3",
+            "strangely_charming:runestone_4",
+            "strangely_charming:runestone_5",
+            "strangely_charming:runestone_6",
+            "strangely_charming:runestone_7",
+            "strangely_charming:runestone_8",
+            "strangely_charming:runestone_9",
+            "strangely_charming:runestone_10",
+            "strangely_charming:runestone_11",
+            "strangely_charming:runestone_12",
+            "strangely_charming:runestone_13",
+            "strangely_charming:runestone_14",
+            "strangely_charming:runestone_15",
+            "strangely_charming:runestone_16",
+            "strangely_charming:runestone_17",
+            "strangely_charming:runestone_18",
+            "strangely_charming:runestone_19",
+            "strangely_charming:runestone_20",
+            "strangely_charming:runestone_21",
+            "strangely_charming:runestone_22",
+            "strangely_charming:runestone_23",
+            "strangely_charming:runestone_24",
+            "strangely_charming:runestone_25"
+          ],
+          "speed": 8.0,
+          "correct_for_drops": true
+        }
+      ]
     }
   }
 }

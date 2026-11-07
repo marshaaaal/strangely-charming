@@ -5,6 +5,32 @@ fn hook(
     packet: &S,
 ) -> core::ops::ControlFlow<()> {
     use crate::game::strangely_charming::{ACTION_CHANNEL, PORTABLE_TABLE, carries_table, compact};
+    if let S::PlayerAction(action) = packet
+        && action.action == 0
+        && let Some(i) = host.hub.guests.iter().position(|g| g.conn == conn && g.creative())
+        && game.sc_rune_at(action.pos)
+    {
+        // Reuse Horizon's normal reach, border, hook and survival dig-clock checks.
+        let mode = host.hub.guests[i].game_mode;
+        host.hub.guests[i].game_mode = 0;
+        game.lan_guest_packet(host, conn, S::PlayerAction(action.clone()));
+        host.hub.guests[i].game_mode = mode;
+        // Creative's next server tick would otherwise perform its usual instant
+        // break. Retain the validated START clock for the client's eventual STOP.
+        if let Some(play) = host.play.get_mut(&conn) {
+            play.digging = None;
+            play.mining = None;
+        }
+        return core::ops::ControlFlow::Break(());
+    }
+    if let S::PlayerAction(action) = packet
+        && action.action == 2
+        && game.sc_rune_at(action.pos)
+        && let Some(play) = host.play.get_mut(&conn)
+    {
+        play.destroy_pos = None;
+        play.delayed = None;
+    }
     if let S::CustomClickAction(p) = packet
         && let Some(action) = p.id.strip_prefix("strangely_charming:quest/")
     {

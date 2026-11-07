@@ -21,10 +21,12 @@
   "portable_crafting": true,
   "protect_pets": true,
   "raid_horns": true,
+  "rune_circles": true,
+  "runebreaker": true,
   "scrollkeepers": true,
   "stackable_enchanted_books": true,
   "stackable_potions": true,
   "stackable_stews": true,
-  "unlimited_anvil": true,
-  "runebreaker": true
+  "underground_ruins": true,
+  "unlimited_anvil": true
 }

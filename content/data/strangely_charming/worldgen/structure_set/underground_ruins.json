@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "strangely_charming:underground_ruins",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 22,
+    "separation": 9,
+    "salt": 5684202
+  }
+}

@@ -7,6 +7,8 @@ use horizon_world::nbt::Tag;
 use serde::{Deserialize, Serialize};
 
 const ISSUER: &str = "strangely_charming:issuer";
+const CONTRACT: &str = "strangely_charming:contract";
+const OWNER: &str = "strangely_charming:contract_owner";
 const ADDRESS: &str = "strangely_charming:issuer_location";
 const CHANNEL: &str = "strangely_charming:quest/";
 fn string(v: impl Into<String>) -> Tag {
@@ -79,6 +81,8 @@ struct Contract {
     issuer: Option<String>,
     label: String,
     progress: u32,
+    #[serde(default)]
+    notified: bool,
 }
 #[derive(Serialize, Deserialize, Default)]
 struct Ledger {
@@ -115,10 +119,16 @@ impl Game<'_> {
         let id = self.sc_record();
         self.score.storage.set(
             &id,
-            Tag::compound([(
-                "ledger",
-                string(serde_json::to_string(l).expect("quest ledger")),
-            )]),
+            Tag::compound([
+                (
+                    "watch",
+                    Tag::Byte(i8::from(l.active.iter().any(|c| !c.notified))),
+                ),
+                (
+                    "ledger",
+                    string(serde_json::to_string(l).expect("quest ledger")),
+                ),
+            ]),
         );
     }
     fn sc_dialog(&mut self, title: &str, body: String, mut actions: Vec<Tag>) {
@@ -182,6 +192,10 @@ impl Game<'_> {
         }
     }
     pub(super) fn sc_scroll(&mut self, stack: &ItemStack, kind: Kind) {
+        if custom(stack, CONTRACT).is_some() {
+            self.sc_journal(None);
+            return;
+        }
         let mut l = self.sc_load();
         l.serial = l.serial.saturating_add(1);
         let issuer = text_value(custom(stack, ISSUER));
@@ -204,26 +218,86 @@ impl Game<'_> {
         }
         let mut l = self.sc_load();
         let mut changed = false;
-        let mut complete = false;
         for c in &mut l.active {
             if c.kind == kind && c.progress < kind.target() {
                 c.progress = c.progress.saturating_add(count).min(kind.target());
                 changed = true;
-                complete |= c.progress == kind.target();
             }
         }
         if changed {
+            self.sc_mark_ready(&mut l);
             self.sc_save(&l);
         }
-        if complete {
-            self.sc_notice(format!(
-                "Quest complete: {}. Sneak-use your Scrollkeeper to claim.",
-                kind.objective()
-            ));
+    }
+    fn sc_mark_ready(&mut self, ledger: &mut Ledger) -> bool {
+        let mut changed = false;
+        for c in &mut ledger.active {
+            if !c.notified && self.sc_progress(c) == c.kind.target() {
+                c.notified = true;
+                changed = true;
+                let opening = if c.kind.delivery().is_some() {
+                    "You found all the items!"
+                } else {
+                    "Quest complete!"
+                };
+                let own_scroll = self
+                    .inventory
+                    .iter()
+                    .flatten()
+                    .chain(self.offhand.iter())
+                    .any(|s| custom(s, CONTRACT) == Some(&Tag::Long(c.serial as i64)));
+                let instruction = if own_scroll {
+                    "Sneak right click your scroll on a Scrollkeeper to turn it in."
+                } else {
+                    "Sneak right click your Scrollkeeper and choose Claim in the journal."
+                };
+                self.sc_alert(format!("{opening} {instruction}"), true);
+            }
+        }
+        changed
+    }
+    pub(super) fn sc_check_ready(&mut self) {
+        if !horizon_mods::evanders_config::enabled("scrollkeepers") || self.player.is_none() {
+            return;
+        }
+        let id = self.sc_record();
+        let record = self.score.storage.get(&id);
+        if record.get("ledger").is_none() || matches!(record.get("watch"), Some(Tag::Byte(0))) {
+            return;
+        }
+        let mut ledger = self.sc_load();
+        if self.sc_mark_ready(&mut ledger) {
+            self.sc_save(&ledger);
+        }
+    }
+    fn sc_remove_scroll(&mut self, serial: u64) {
+        let owner = format!("{:032x}", self.native_acting_id());
+        for slot in self
+            .inventory
+            .iter_mut()
+            .chain(std::iter::once(&mut self.offhand))
+        {
+            if slot.as_ref().is_some_and(|s| {
+                custom(s, CONTRACT) == Some(&Tag::Long(serial as i64))
+                    && text_value(custom(s, OWNER)).as_ref() == Some(&owner)
+            }) {
+                *slot = None;
+            }
         }
     }
     pub(super) fn sc_quest_desk(&mut self, index: usize) {
         let id = self.sc_keeper_id(self.mobs[index].id);
+        let owner = format!("{:032x}", self.native_acting_id());
+        if let Some(s) = self.held()
+            && let Some(Tag::Long(serial)) = custom(s, CONTRACT)
+        {
+            if text_value(custom(s, OWNER)) == Some(owner) {
+                self.sc_quest_action(&format!("claim/{serial}/{id}"));
+            } else {
+                self.sc_notice("This scroll belongs to another player.");
+            }
+            return;
+        }
         self.sc_journal(Some(&id));
     }
     pub(super) fn sc_journal(&mut self, keeper: Option<&str>) {
@@ -293,6 +367,7 @@ impl Game<'_> {
                 return;
             };
             if Kind::item(&stack.item) != Some(*kind)
+                || custom(stack, CONTRACT).is_some()
                 || text_value(custom(stack, ISSUER)) != *issuer
             {
                 return;
@@ -310,9 +385,15 @@ impl Game<'_> {
                     issuer: issuer.clone(),
                     label,
                     progress: 0,
+                    notified: false,
                 });
+                let owner = format!("{:032x}", self.native_acting_id());
+                let scroll = self.stack_in_mut(*slot).as_mut().unwrap();
+                set_custom(scroll, CONTRACT, Tag::Long(serial as i64));
+                set_custom(scroll, OWNER, string(owner));
+            } else {
+                *self.stack_in_mut(*slot) = None;
             }
-            *self.stack_in_mut(*slot) = None;
             l.preview = None;
             self.sc_save(&l);
             self.sc_notice(if verb == "accept" {
@@ -326,6 +407,7 @@ impl Game<'_> {
             return;
         };
         if verb == "abandon" {
+            self.sc_remove_scroll(serial);
             l.active.remove(i);
             self.sc_save(&l);
             self.sc_notice("Quest abandoned.");
@@ -374,6 +456,7 @@ impl Game<'_> {
         if let Some(item) = kind.delivery() {
             self.native_take_items(item, kind.target());
         }
+        self.sc_remove_scroll(serial);
         self.native_give_items("minecraft:emerald", kind.reward());
         self.experience.give((kind.reward() * 3) as i32);
         l.active.remove(i);

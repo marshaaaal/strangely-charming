@@ -1,6 +1,8 @@
-# Strangely Charming
+![Strangely Charming](art/st_title_card.png)
 
 A collection of crafting, exploration and village features for Horizon. Each feature listed below defaults to enabled and can be turned off in `config/strangely_charming.json`. Modpack makers are encouraged to prune features they feel are overpowered or conflict with other mods.
+
+![](art/st_hr.png)
 
 ## Crafting and equipment
 
@@ -13,15 +15,17 @@ A collection of crafting, exploration and village features for Horizon. Each fea
 - **Armor recycling** returns one ingot or gem from fully repaired, unenchanted armor or horse armor.
 - **Kilns** use fuel to fire sand, clay and other mineral materials faster.
 - **Table Saws and Lumberjacks** turn logs and planks into wooden goods and give villagers a wood-trading profession.
-- **Runebreaker** is a handheld diamond hammer crafted from five diamonds and two sticks. This version introduces its recipe and artwork. Rune breaking is planned for a future version.
+- **Runebreaker** is a handheld diamond hammer crafted from five diamonds and two sticks. Use it to destroy a runestone. The stone takes as long to mine as obsidian and drops nothing.
 
 ## Villages and exploration
 
-- **Scrollkeepers** claim Writing Desks and sell local gathering, crafting, mining and hunting quests. Keep two active contracts, check progress with **J**, and sneak-use the issuing villager to collect rewards. Another Scrollkeeper can honor the contract if the issuer dies.
+- **Scrollkeepers** claim Writing Desks and sell local gathering, crafting, mining and hunting quests. Keep two active contracts, check progress with **J**, and sneak-right-click the issuing villager with your completed scroll to collect rewards. Another Scrollkeeper can honor the contract if the issuer dies.
 - **Beekeepers** claim beehives and trade bee-related goods.
 - **Poison Apples** turn adult, working-age villagers other than nitwits into briefly stunned, daylight-safe zombie villagers while preserving their profession and trades. Brew a potion to unlock the recipe.
 - **Moonstones** are sixteen colors of translucent, glowing blocks found in geodes on the outer End islands. Mine them with a pickaxe.
-- **Totems of Enchanting** can be found in End city chests. Sneak-use a totem to bank your XP points. Use the filled totem normally to break it and recover them.
+- **Totems of Enchanting** can be found in End city chests. Sneak-use a totem to bank your XP points. Use the filled totem normally to recover the stored points. The same totem can be filled again.
+- **Rune circles** mark open Overworld grasslands with eight carved stone pillars.
+- **Underground ruins** add branching ice chambers beneath snowy Overworld biomes and buried halls in the Nether.
 - **Coral Squids** swim near living coral in warm oceans.
 - **Mansion loot** and **Nether fortress loot** add extra treasure to their respective chests.
 - **Mineshaft ores** add coal, iron and diamond ore to eligible stone and deepslate floors.
@@ -69,3 +73,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 The Runebreaker uses Malcolm Riley’s unmodified diamond hammer sprite under CC BY 4.0. [Original artwork](https://github.com/malcolmriley/unused-textures/blob/8b85ad732023174d9a9da74e6bf2272d6c0bef17/items/tool_fancy_diamond_hammer.png) · [License](https://creativecommons.org/licenses/by/4.0/) · [Additional credits](mixins/strangely_charming/NOTICE)
+
+![](art/st_footer.png)

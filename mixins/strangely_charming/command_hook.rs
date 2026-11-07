@@ -38,26 +38,26 @@ fn hook(game: &mut crate::game::Game<'_>, command: &str, ran: &mut bool) {
                     )))
                 }
                 Err(error) => {
-                    game.native_feedback(horizon_client::text::Text::literal(error));
+                    game.sc_notice(error);
                     None
                 }
             }
         }
         Ok(Command::Remove) => Some(commands::REMOVE.to_owned()),
         Ok(Command::Help) => {
-            game.native_feedback(horizon_client::text::Text::literal("Strangely Charming: /strangely_charming dummy <username> | dummy texture <64-digit hash> [slim] | dummy file \"<PNG path>\" [slim] | dummy remove. Requires summon permission. Remove clears only tagged dummies within 32 blocks."));
+            game.sc_notice("Strangely Charming: /strangely_charming dummy <username> | dummy texture <64-digit hash> [slim] | dummy file \"<PNG path>\" [slim] | dummy remove. Requires summon permission. Remove clears only tagged dummies within 32 blocks.");
             None
         }
         Err(message) => {
-            game.native_feedback(horizon_client::text::Text::literal(message));
+            game.sc_notice(message);
             None
         }
     };
     if let Some(line) = output {
         if let Err(error) = game.native_send_chat(&line) {
-            game.native_feedback(horizon_client::text::Text::literal(format!(
+            game.sc_notice(format!(
                 "Strangely Charming: {error}"
-            )));
+            ));
         }
     }
 }
